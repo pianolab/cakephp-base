@@ -19,7 +19,7 @@
       <a href="#" class="brand">Cake Base</a>
       <div class="nav-collapse collapse">
         <p class="navbar-text pull-right">
-          Logged in as <a class="navbar-link" href="#">Username</a>
+          Logged in as <a class="navbar-link" href="#">Developer</a>
         </p>
         <ul class="nav">
           <li class="active"><?php echo $this->Html->link('Home', '/') ?></li>
@@ -53,7 +53,10 @@
   </footer>
 </div><!--/.fluid-container-->
 
-<?php echo $this->Html->script('application'); ?>
+<?php echo $this->Html->script(array(
+  'jquery/jquery.min',
+  'bootstrap/bootstrap.min',
+)); ?>
 <?php echo $this->fetch('script'); ?>
 <?php echo $this->element('sql_dump'); ?>  
 </body>
