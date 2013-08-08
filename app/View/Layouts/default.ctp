@@ -11,9 +11,14 @@
   <div class="row-fluid">
     <?php echo $this->Flash->flash() ?>
     
-    <?php echo $this->element('layouts/menu_sidebar'); ?>
+    <div class="span3">
+      <?php echo $this->element('layouts/menu_sidebar'); ?>
+    </div><!--/span-->
     
-    <?php echo $this->fetch('content'); ?>
+    <div class="span9">
+      <h1>CakePHP Base</h1>
+      <?php echo $this->fetch('content'); ?>
+    </div><!--/span-->
   </div><!--/row-->
 
   <hr>
