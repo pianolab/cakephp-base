@@ -8,6 +8,7 @@
 /build
 /dist
 /tags
+/sftp-config.json
 
 # OS generated files #
 ######################
@@ -19,3 +20,5 @@
 Icon?
 ehthumbs.db
 Thumbs.db
+
+sftp-config.json

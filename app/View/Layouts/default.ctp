@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-ng-app="cooperativa">
 <head>
   <title><?php echo $title_for_layout; ?></title>
   <?php echo $this->Html->css('application'); ?>
@@ -7,42 +7,12 @@
 </head>
 <body>
 
-<div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container-fluid">
-      <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="#" class="brand">Cake Base</a>
-      <div class="nav-collapse collapse">
-        <p class="navbar-text pull-right">
-          Logged in as <a class="navbar-link" href="#">Developer</a>
-        </p>
-        <ul class="nav">
-          <li class="active"><?php echo $this->Html->link('Home', '/') ?></li>
-          <li><?php echo $this->Html->link('Contact', '#contact') ?></li>
-        </ul>
-      </div><!--/.nav-collapse -->
-    </div>
-  </div>
-</div>
-
 <div class="container-fluid">
   <div class="row-fluid">
-    <div class="span3">
-      <div class="well sidebar-nav">
-        <ul class="nav nav-list">
-          <li class="nav-header">Sidebar</li>
-          <li class="active"><a href="#">Link</a></li>
-          <li><a href="#">Link</a></li>
-          <li><a href="#">Link</a></li>
-          <li><a href="#">Link</a></li>
-        </ul>
-      </div><!--/.well -->
-    </div><!--/span-->
+    <?php echo $this->Flash->flash() ?>
+    
+    <?php echo $this->element('layouts/menu_sidebar'); ?>
+    
     <?php echo $this->fetch('content'); ?>
   </div><!--/row-->
 
@@ -53,11 +23,7 @@
   </footer>
 </div><!--/.fluid-container-->
 
-<?php echo $this->Html->script(array(
-  'jquery/jquery.min',
-  'bootstrap/bootstrap.min',
-)); ?>
-<?php echo $this->fetch('script'); ?>
-<?php echo $this->element('sql_dump'); ?>  
+<?php echo $this->element('layouts/javascripts'); ?>
+<?php echo $this->element('sql_dump'); ?>
 </body>
 </html>

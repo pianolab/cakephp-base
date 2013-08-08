@@ -17,19 +17,22 @@ class AppController extends Controller
    *
    * @var array
    */
-  public $components = array();
+  public $components = array('Auth', 'Session', 'Flash');
 
   /**
    * Default helper
    * 
    * @var array
    */
-  public $helpers = array('Html', 'Form', 'Session');
+  public $helpers = array('Html', 'Form', 'Session', 'Flash');
 
   public function beforeFilter()
   {
     parent::beforeFilter();
     $this->activeRecordConfig();
+    if ($this->name != 'CakeError') {
+      $this->authConfig();
+    }
   }
 
   public function beforeRender()
@@ -49,7 +52,7 @@ class AppController extends Controller
       $dbConfig = new DATABASE_CONFIG();
       
       $cfg->set_model_directory(APP . 'Model');
-      $cfg->set_connections(array('development' => 'mysql://' . $dbConfig->default['login'] . ':' . $dbConfig->default['password'] . '@' . $dbConfig->default['host'] . '/' . $dbConfig->default['database']));
+      $cfg->set_connections(array('development' => 'mysql://' . $dbConfig->default['login'] . ':' . $dbConfig->default['password'] . '@' . $dbConfig->default['host'] . '/' . $dbConfig->default['database'] . ';charset=utf8'));
     });
   }
 
@@ -58,8 +61,8 @@ class AppController extends Controller
    */
   public function setTitleForLayout()
   {
-    $title = ($this->titleForLayout) ? (' » ' . $this->titleForLayout) : null;
-    $this->arrView['page_title'] = $title;
+    $title = ($this->titleForLayout) ? ($this->titleForLayout . ' » ') : null;
+    $this->arrView['title_for_layout'] = $title . 'Cooperativa 24h';
   } # endfunction;
 
   /**
@@ -73,4 +76,20 @@ class AppController extends Controller
      */
     foreach ($this->arrView as $key => $value) { $this->set($key, $value); } # endforeach
   } # endfunction;
+
+  public function authConfig() 
+  {
+    $this->Auth->authError = 'É necessário está logado para acessar essa área.';
+    $this->Auth->loginError = 'E-mail e/ou senha estão errados';
+
+    $this->Auth->loginRedirect = '/';
+    $this->Auth->logoutRedirect = '/login';
+    $this->Auth->authenticate = array(
+      'Form',
+      'all' => array('userModel' => 'User'),
+    );
+
+    if($this->Auth->loggedIn()) $this->arrView['logged'] = $this->Auth->user();
+  } # endfunction;
+
 }

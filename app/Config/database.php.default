@@ -100,7 +100,7 @@ class DATABASE_CONFIG
   {     
     $this->default = $this->development;
 
-    if(isset($_SERVER['SERVER_NAME'])){
+    if(isset($_SERVER['SERVER_NAME'])) {
       foreach ($this->domains as $key => $domains) {
         foreach ($domains as $k => $domain) {
           if (strpos($_SERVER['SERVER_NAME'], $domain) !== false) {
